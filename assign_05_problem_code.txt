@@ -1,0 +1,90 @@
+//Ibrahim mohamed abbass
+//20216490
+
+package com.MyProject.myapp;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args){
+
+        BankAccount acc1 = new BankAccount();
+        BankAccount acc2 = new BankAccount(1700,"Abdullah","CIB");
+
+        acc1.deposit(2000);
+        acc1.withdraw(650);
+        acc2.deposit(100);
+        acc2.withdraw(1200);
+        acc2.deposit(150);
+
+        System.out.println("Balance of Account1 : "+ acc1.getBalance());
+        System.out.println("Balance of Account2 : " + acc2.getBalance());
+
+       System.out.println("Number of Users : " + BankAccount.getNumOfUsers());
+       System.out.println("Number of System calls : " + BankAccount.getNumOfCalls());
+       
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+//Ibrahim mohamed abbass
+//20216490
+
+package com.MyProject.myapp;
+public class BankAccount {
+    private static int numOfUsers = 0;
+    private static int numOfCalls = 0;
+    private static final String country = "Egypt";
+    private int balance;
+    private String username;
+    private String bankName;
+    public BankAccount() {
+        balance = 0;
+        username = "";
+        bankName = "";
+        numOfUsers++;
+        System.out.println("A new Account has been created.");
+    }
+    public BankAccount(int balance, String username, String bankName) {
+        this.balance = balance;
+        this.username = username;
+        this.bankName = bankName;
+        numOfUsers++;
+        System.out.println("A new Account has been created.");
+    }
+    public void deposit(int amount) {
+        balance += amount;
+        numOfCalls++;
+    }
+
+    public void withdraw(int amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            numOfCalls++;
+        } else {
+            System.out.println("Can't complete this transaction");
+        }
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+    public static int getNumOfUsers() {
+        return numOfUsers;
+    }
+    public static int getNumOfCalls() {
+        return numOfCalls;
+    }
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+//OUTPUT
+
+A new Bank Account has been created.
+A new Bank Account has been created.
+Balance of Account1 : 1350
+Balance of Account2 : 750
+Number of Users : 2
+Number of System calls : 5
